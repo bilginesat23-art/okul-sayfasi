@@ -1,0 +1,714 @@
+
+<!DOCTYPE html>
+<html lang="mk">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>ОУ „Мустафа Кемал Ататурк“</title>
+<style>
+:root{--dark:#142743;--red:#c92d38;--bg:#f2f5f9;--green:#147b48;--orange:#9a690e}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:#25364b;font-family:Arial,sans-serif;line-height:1.6}
+button,select,input{font:inherit}
+button{cursor:pointer}
+.container{max-width:1200px;margin:auto;padding:0 18px}
+.top{background:var(--dark);color:white;padding:9px;font-size:12px}
+.top .container{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px}
+.lang button{background:transparent;border:1px solid #ffffff66;color:white;border-radius:5px;padding:5px 10px}
+.lang button.active{background:var(--red);border-color:var(--red)}
+header{background:white;padding:23px 0}
+.brand{display:flex;align-items:center;gap:18px}
+.brand img{width:80px;height:80px;object-fit:contain}
+.brand h1{color:var(--dark);margin:0;font-size:25px}
+.brand p{color:#69778b;margin:3px 0}
+nav{background:var(--dark);position:sticky;top:0;z-index:20;display:flex;justify-content:center;flex-wrap:wrap}
+nav a{color:white;text-decoration:none;padding:13px;font-size:13px;font-weight:bold}
+nav a:hover{background:var(--red)}
+.hero{background:linear-gradient(90deg,#142743ef,#14274388),url("https://www.aa.com.tr/uploads/userFiles/4f62407a-abf2-4464-9690-b6acbca575b5/07_2024%2F01_MAYIS%2F20240517_2_63892780_100961255.jpg") center/cover;color:white;padding:100px 0;position:relative}
+.hero h2{font-size:clamp(30px,5vw,48px);max-width:700px;color:white}
+.hero p{max-width:600px}
+.hero-quote{text-align:right;max-width:500px!important;margin:45px 0 0 auto;font-size:16px;font-style:italic;font-weight:bold;text-shadow:0 2px 5px #000}
+section{padding-top:60px;scroll-margin-top:85px}
+h2,h3{color:var(--dark)}
+.card{background:white;padding:25px;border-radius:13px;box-shadow:0 5px 24px #14274312;margin:18px 0}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:15px}
+.person{background:white;border:1px solid #dce3ed;padding:22px;border-radius:12px;text-align:left;color:var(--dark)}
+.person:hover{border-color:var(--red)}
+.person strong{display:block}
+.person small{color:#68778d}
+.avatar{width:52px;height:52px;background:#fae9eb;color:var(--red);border-radius:12px;display:grid;place-items:center;font-size:20px;font-weight:bold;margin-bottom:13px}
+.director{border-left:6px solid var(--red);display:flex;align-items:center;gap:22px}
+.director .avatar{width:80px;height:80px;border-radius:50%;background:var(--dark);color:white;margin:0}
+.detail{background:white;padding:22px;border-left:5px solid var(--red);border-radius:10px;margin-top:15px}
+.detail[hidden],.hidden{display:none!important}
+.tag{display:inline-block;padding:6px 12px;border-radius:20px;background:#f0f3f8;margin:4px;font-size:13px}
+.controls{display:flex;gap:14px;flex-wrap:wrap;align-items:end;margin:20px 0}
+.field{display:flex;flex-direction:column;gap:6px}
+label{font-size:13px;font-weight:bold}
+select,input{padding:11px;border:1px solid #cbd5e1;border-radius:8px;background:white;max-width:100%}
+.btn{border:0;border-radius:8px;padding:12px 20px;background:var(--red);color:white;font-weight:bold}
+.btn.dark{background:var(--dark)}
+.wrap{overflow-x:auto}
+table{width:100%;border-collapse:collapse;min-width:690px;font-size:13px}
+th,td{border:1px solid #dce3ed;padding:12px;text-align:left;vertical-align:top}
+thead th{background:var(--dark);color:white}
+tbody tr:nth-child(even){background:#f7f9fc}
+.free{color:var(--green);font-weight:bold}
+.busy{color:var(--red);font-weight:bold}
+.unknown{color:var(--orange);font-weight:bold}
+.note{background:#fff8e8;border-left:4px solid #e7b451;padding:13px;margin-top:16px;border-radius:6px;font-size:13px}
+.summary{font-weight:bold;margin:15px 0}
+.edit-table select,.edit-table input{width:100%}
+footer{margin-top:65px;background:var(--dark);color:white;text-align:center;padding:35px}
+footer a{color:white}
+footer p{margin:7px 0}
+@media(max-width:600px){
+header h1{font-size:18px}
+header img{width:60px;height:60px}
+.card{padding:14px}
+.hero{padding:65px 0}
+nav a{padding:9px;font-size:11px}
+.director{flex-direction:column;text-align:center}
+.hero-quote{font-size:13px}
+}
+</style>
+</head>
+<body>
+<div class="top">
+<div class="container">
+<span id="topInfo"></span>
+<div class="lang">
+<button id="mkBtn" class="active" onclick="setLanguage('mk')">🇲🇰 Македонски</button>
+<button id="trBtn" onclick="setLanguage('tr')">🇹🇷 Türkçe</button>
+</div>
+</div>
+</div>
+<header>
+<div class="container brand">
+<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTxKDoMEgOFGYCq4wHpcdW1c9G3yfSq7HcESdowrhXpGw&s=10" alt="Лого">
+<div>
+<h1 id="schoolName"></h1>
+<p id="schoolLocation"></p>
+</div>
+</div>
+</header>
+<nav>
+<a href="#home" data-t="home"></a>
+<a href="#about" data-t="about"></a>
+<a href="#director" data-t="director"></a>
+<a href="#teachers" data-t="teachers"></a>
+<a href="#classes" data-t="classTeachers"></a>
+<a href="#subjects" data-t="subjects"></a>
+<a href="#schedule" data-t="schedule"></a>
+<a href="#replacement" data-t="replacements"></a>
+<a href="#editor" data-t="editing"></a>
+<a href="#duty" data-t="duty"></a>
+<a href="#hours" data-t="hours"></a>
+</nav>
+<div class="hero" id="home">
+<div class="container">
+<h2 data-t="heroTitle"></h2>
+<p data-t="heroDesc"></p>
+<p class="hero-quote" data-t="quote"></p>
+</div>
+</div>
+<main class="container">
+<section id="about">
+<h2 data-t="about"></h2>
+<div class="card">
+<p id="aboutSchool"></p>
+<p data-t="aboutDesc"></p>
+</div>
+</section>
+<section id="director">
+<h2 data-t="directorTitle"></h2>
+<div class="card director">
+<div class="avatar" id="directorAvatar">БШ</div>
+<div>
+<small data-t="management"></small>
+<h2 id="directorName">Бенази Шхемовска</h2>
+<p data-t="directorPosition"></p>
+</div>
+</div>
+</section>
+<section id="teachers">
+<h2 data-t="ourTeachers"></h2>
+<p data-t="clickTeacher"></p>
+<div class="grid" id="teacherGrid"></div>
+<div class="detail" id="teacherDetail" hidden></div>
+</section>
+<section id="classes">
+<h2 data-t="classTitle"></h2>
+<div class="grid" id="classGrid"></div>
+<div class="detail" id="classDetail" hidden></div>
+</section>
+<section id="subjects">
+<h2 data-t="teacherSubjects"></h2>
+<div class="card wrap">
+<table>
+<thead><tr><th data-t="teacher"></th><th data-t="subjects"></th></tr></thead>
+<tbody id="subjectBody"></tbody>
+</table>
+</div>
+</section>
+<section id="schedule">
+<h2 data-t="weeklySchedule"></h2>
+<div class="card">
+<div class="controls">
+<div class="field">
+<label data-t="grade"></label>
+<select id="grade"></select>
+</div>
+</div>
+<h3 id="scheduleTitle"></h3>
+<div class="wrap"><table id="classScheduleTable"></table></div>
+</div>
+</section>
+<section id="replacement">
+<h2 data-t="replacementTitle"></h2>
+<p data-t="replacementDesc"></p>
+<div class="card">
+<div class="controls">
+<div class="field">
+<label data-t="absentTeacher"></label>
+<select id="absentTeacher"></select>
+</div>
+<div class="field">
+<label data-t="day"></label>
+<select id="selectedDay"></select>
+</div>
+<button class="btn" id="checkBtn" data-t="check"></button>
+</div>
+<h3 id="resultTitle"></h3>
+<div class="summary" id="summary"></div>
+<div class="wrap">
+<table>
+<thead><tr>
+<th data-t="lessonNumber"></th>
+<th data-t="gradeSubject"></th>
+<th data-t="status"></th>
+<th data-t="availableTeachers"></th>
+</tr></thead>
+<tbody id="resultBody"></tbody>
+</table>
+</div>
+<div class="note" data-t="replacementNote"></div>
+</div>
+</section>
+<section id="editor">
+<h2 data-t="editTitle"></h2>
+<div class="card">
+<p data-t="editDesc"></p>
+<div class="controls">
+<div class="field">
+<label data-t="teacher"></label>
+<select id="editTeacher"></select>
+</div>
+<div class="field">
+<label data-t="day"></label>
+<select id="editDay"></select>
+</div>
+</div>
+<div class="wrap">
+<table class="edit-table">
+<thead><tr>
+<th data-t="lessonNumber"></th>
+<th data-t="status"></th>
+<th data-t="gradeSubject"></th>
+</tr></thead>
+<tbody id="editBody"></tbody>
+</table>
+</div>
+<div class="controls">
+<button class="btn" id="saveBtn" data-t="save"></button>
+<button class="btn dark" id="resetBtn" data-t="reset"></button>
+</div>
+<p id="saveMessage"></p>
+<div class="note" data-t="storageNote"></div>
+</div>
+</section>
+<section id="duty">
+<h2 data-t="dutyTitle"></h2>
+<div class="grid" id="dutyGrid"></div>
+</section>
+<section id="hours">
+<h2 data-t="lessonTimes"></h2>
+<div class="grid" id="hoursGrid"></div>
+</section>
+</main>
+<footer>
+<strong id="footerSchool"></strong>
+<p id="footerDirector"></p>
+<p id="footerLocation"></p>
+<p id="footerYear"></p>
+<p id="footerPrepared"></p>
+<p id="footerOpen"></p>
+<p>☎ <a href="tel:+38972556507">072 556 507</a></p>
+<p>✉ <a href="mailto:bilginesat23@gmail.com">bilginesat23@gmail.com</a></p>
+</footer>
+<script>
+"use strict";
+const translations={
+mk:{
+home:"Почетна",about:"За училиштето",director:"Директор",teachers:"Наставници",classTeachers:"Раководители",subjects:"Предмети",schedule:"Распоред",replacements:"Замени",editing:"Уредување",duty:"Дежурни",hours:"Часови",
+heroTitle:"Место каде што знаењето создава иднина.",
+heroDesc:"Добредојдовте на информативната веб-страница на нашето училиште.",
+quote:"Образованието е најмоќното оружје што можете да го употребите за да го промените светот.",
+aboutDesc:"Информации за наставниците, учениците, распоредите и замените на наставниците.",
+directorTitle:"Директор на училиштето",management:"РАКОВОДСТВО",directorPosition:"Директор на училиштето",
+ourTeachers:"Нашите наставници",clickTeacher:"Кликнете на наставник за да ги видите предметите.",
+classTitle:"Одделенски раководители и ученици",teacherSubjects:"Наставници и предмети",teacher:"Наставник",
+weeklySchedule:"Неделен распоред на часови",grade:"Одделение",
+replacementTitle:"Замени на отсутни наставници",
+replacementDesc:"Изберете наставник и ден. Системот автоматски ги проверува слободните наставници.",
+absentTeacher:"Отсутен наставник",day:"Ден",check:"Провери замени",lessonNumber:"Час",gradeSubject:"Одделение / предмет",status:"Статус",availableTeachers:"Наставници кои можат да заменат",
+replacementNote:"Наставниците се предлагаат само ако во истиот час немаат настава според внесениот распоред. Наставниците без проверен распоред не се означуваат како слободни.",
+editTitle:"Уредување на распоредот",editDesc:"Може да го поправите секој час и да внесете одделение или предмет.",
+save:"Зачувај распоред",reset:"Врати го почетниот распоред",
+storageNote:"Промените се зачувуваат во вашиот прелистувач. Непроверените часови треба да се потврдат.",
+dutyTitle:"Дежурни наставници",lessonTimes:"Распоред на часовите",subjectsLabel:"Предмети",showSubjects:"Прикажи предмети",students:"ученици",gradeWord:"одделение",weekly:"Неделен распоред",lesson:"час",
+hasLesson:"ИМА ЧАС",noLesson:"НЕМА ЧАС – СЛОБОДЕН",unverified:"НЕПРОВЕРЕН РАСПОРЕД",canReplace:"Може да замени",noCandidates:"Нема потврдени слободни наставници",notNeeded:"Не е потребна замена",needsCheck:"Потребна е проверка",notEntered:"Не е внесено",
+total:"Вкупно",busyCount:"часа со настава",freeCount:"слободни часа",unknownCount:"непроверени часа",unknown:"Непроверен",busy:"Има час",free:"Слободен",
+placeholder:"на пр. VIII-4 – Физика",saved:"Распоредот е успешно зачуван!",saveError:"Грешка при зачувување!",resetConfirm:"Дали сакате да го вратите почетниот распоред?",resetDone:"Почетниот распоред е вратен.",
+school:"ОУ „Мустафа Кемал Ататурк“",location:"Центар Жупа – с. Броштица, Северна Македонија",year:"Учебна година 2026/2027",prepared:"Подготвил: Билгин Есат",open:"Работно време: 07:30 – 14:00",directorFooter:"Директор: Бенази Шхемовска"
+},
+tr:{
+home:"Ana Sayfa",about:"Okul Hakkında",director:"Müdür",teachers:"Öğretmenler",classTeachers:"Sınıf Öğretmenleri",subjects:"Dersler",schedule:"Ders Programı",replacements:"Öğretmen Değiştirme",editing:"Program Düzenleme",duty:"Nöbetçi Öğretmenler",hours:"Ders Saatleri",
+heroTitle:"Bilginin geleceği şekillendirdiği yer.",
+heroDesc:"Okulumuzun bilgilendirme web sayfasına hoş geldiniz.",
+quote:"Dünyayı değiştirmek için kullanabileceğin en güçlü silah eğitimdir.",
+aboutDesc:"Öğretmenler, öğrenciler, ders programları ve öğretmen değişiklikleri hakkında bilgiler.",
+directorTitle:"Okul Müdürü",management:"OKUL YÖNETİMİ",directorPosition:"Okul Müdürü",
+ourTeachers:"Öğretmenlerimiz",clickTeacher:"Verdiği dersleri görmek için öğretmene tıklayın.",
+classTitle:"Sınıf Öğretmenleri ve Öğrenciler",teacherSubjects:"Öğretmenler ve Dersleri",teacher:"Öğretmen",
+weeklySchedule:"Haftalık Ders Programı",grade:"Sınıf",
+replacementTitle:"Gelmeyen Öğretmenlerin Yerine Görevlendirme",
+replacementDesc:"Öğretmen ve gün seçin. Sistem boş olan öğretmenleri otomatik kontrol eder.",
+absentTeacher:"Gelmeyen Öğretmen",day:"Gün",check:"Yerine Geçecekleri Kontrol Et",lessonNumber:"Ders",gradeSubject:"Sınıf / Ders",status:"Durum",availableTeachers:"Yerine Geçebilecek Öğretmenler",
+replacementNote:"Öğretmenler yalnızca girilmiş programa göre aynı saatte dersleri yoksa önerilir. Programı doğrulanmamış öğretmenler boş olarak gösterilmez.",
+editTitle:"Ders Programını Düzenleme",editDesc:"Her ders saatini düzeltebilir, sınıf veya ders adı girebilirsiniz.",
+save:"Programı Kaydet",reset:"Başlangıç Programına Dön",
+storageNote:"Değişiklikler tarayıcınızda saklanır. Doğrulanmamış ders saatleri kontrol edilmelidir.",
+dutyTitle:"Nöbetçi Öğretmenler",lessonTimes:"Ders Saatleri",subjectsLabel:"Dersler",showSubjects:"Dersleri Göster",students:"öğrenci",gradeWord:"sınıf",weekly:"Haftalık Ders Programı",lesson:"ders",
+hasLesson:"DERSİ VAR",noLesson:"DERSİ YOK – BOŞ",unverified:"PROGRAM DOĞRULANMADI",canReplace:"Yerine geçebilir",noCandidates:"Doğrulanmış boş öğretmen bulunamadı",notNeeded:"Yerine öğretmen gerekmiyor",needsCheck:"Kontrol edilmesi gerekiyor",notEntered:"Bilgi girilmedi",
+total:"Toplam",busyCount:"ders saati dolu",freeCount:"boş ders saati",unknownCount:"doğrulanmamış ders saati",unknown:"Doğrulanmadı",busy:"Dersi var",free:"Boş",
+placeholder:"Örn. VIII-4 – Fizik",saved:"Ders programı başarıyla kaydedildi!",saveError:"Kaydetme sırasında hata oluştu!",resetConfirm:"Başlangıç ders programına dönmek istiyor musunuz?",resetDone:"Başlangıç programı geri yüklendi.",
+school:"Mustafa Kemal Atatürk İlköğretim Okulu",location:"Merkez Jupa – Broştitsa, Kuzey Makedonya",year:"2026/2027 Eğitim Öğretim Yılı",prepared:"Hazırlayan: Bilgin Esat",open:"Çalışma Saatleri: 07:30 – 14:00",directorFooter:"Okul Müdürü: Benazi Şhemovska"
+}
+};
+let currentLanguage="mk";
+try{const s=localStorage.getItem("mka_language");if(["mk","tr"].includes(s))currentLanguage=s}catch(e){}
+function T(k){return translations[currentLanguage][k]||k}
+const teacherTranslations={
+"Билгин Есат":"Bilgin Esat",
+"Зини Скендер":"Zini Skender",
+"Неџмије Мерсимовска":"Necmiye Mersimovska",
+"Ариф Скендер":"Arif Skender",
+"Мелиха Арслановска":"Meliha Arslanovska",
+"Ајсун Имер":"Aysun İmer",
+"Сибел Елмас":"Sibel Elmas",
+"Нузи Ризвановски":"Nuzi Rizvanovski",
+"Асан Мемедовски":"Asan Memedovski",
+"Бенази Шхемовска":"Benazi Şhemovska"
+};
+const studentTranslations={
+"Зејнеп Мустафовска":"Zeynep Mustafovska",
+"Хабил Незовски":"Habil Nezovski",
+"Емел Мерсимовски":"Emel Mersimovski",
+"Пенил Изејровски":"Penil İzeyrovski",
+"Самела Изејровска":"Samela İzeyrovska",
+"Сенаит Алиовска":"Senait Aliovska",
+"Сенида Алиовски":"Senida Aliovski",
+"Едмон Сакуровски":"Edmon Sakurovski",
+"Ресул Ризвановски":"Resul Rizvanovski",
+"Мелиха Мустафовска":"Meliha Mustafovska",
+"Алиха Ваитовска":"Aliha Vaitovska"
+};
+const subjectTranslations={
+"Македонски јазик":"Makedonca",
+"Математика":"Matematik",
+"Природни науки":"Doğa Bilimleri",
+"Музичко образование":"Müzik Eğitimi",
+"Ликовно образование":"Resim Eğitimi",
+"Физичко образование":"Beden Eğitimi",
+"Физичко и здравствено образование":"Beden ve Sağlık Eğitimi",
+"Техничко образование и информатика":"Teknik Eğitim ve Bilişim",
+"Англиски јазик":"İngilizce",
+"Италијански јазик":"İtalyanca",
+"Физика":"Fizik",
+"Хемија":"Kimya",
+"Биологија":"Biyoloji",
+"Историја":"Tarih",
+"Географија":"Coğrafya",
+"Историја и општество":"Tarih ve Toplum",
+"Општество":"Toplum",
+"Граѓанско образование":"Vatandaşlık Eğitimi",
+"Техничко образование":"Teknik Eğitim",
+"Слободен изборен предмет":"Serbest Seçmeli Ders",
+"Слободни активности":"Serbest Etkinlikler",
+"Иновации":"İnovasyon",
+"Одделенски час":"Sınıf Rehberlik Saati",
+"Додатна настава":"Ek Ders",
+"Дополнителна настава":"Destekleme Dersi",
+"Математичка":"Matematik",
+"СИП":"Serbest Seçmeli Ders",
+"Англиски":"İngilizce",
+"Природни":"Doğa Bilimleri",
+"Техничко":"Teknik Eğitim"
+};
+function translateName(s){return currentLanguage==="tr"?(teacherTranslations[s]||s):s}
+function translateStudentName(s){return currentLanguage==="tr"?(studentTranslations[s]||s):s}
+function translateSubject(s){
+if(currentLanguage==="mk"||!s)return s;
+return String(s).split(/(\s*[–—]\s*|\s*[,;]\s*)/).map(p=>{
+const v=p.trim();return subjectTranslations[v]?p.replace(v,subjectTranslations[v]):p
+}).join("")
+}
+function toMacedonianLesson(s){
+if(!s)return "";
+const r=Object.entries(subjectTranslations).sort((a,b)=>b[1].length-a[1].length);
+return String(s).split(/(\s*[–—]\s*|\s*[,;]\s*)/).map(p=>{
+const m=r.find(([mk,tr])=>tr===p.trim());
+return m?p.replace(p.trim(),m[0]):p
+}).join("")
+}
+function translateLesson(s){return s?translateSubject(s):"—"}
+function make(tag,text,cls){const e=document.createElement(tag);if(text!==undefined)e.textContent=text;if(cls)e.className=cls;return e}
+function addOption(s,v,l){s.add(new Option(l,v))}
+function card(name,description,click){
+const b=make("button",undefined,"person");b.type="button";
+const n=translateName(name);const initials=n.split(" ").map(x=>x[0]).join("").slice(0,2);
+b.append(make("div",initials,"avatar"),make("strong",n),make("small",description));
+b.onclick=click;return b
+}
+const teachers=[
+{name:"Билгин Есат",subjects:["Физика","Техничко образование","Слободен изборен предмет","Математика","Природни науки"]},
+{name:"Зини Скендер",subjects:["Ликовно образование","Физичко образование","Иновации"]},
+{name:"Неџмије Мерсимовска",subjects:["Македонски јазик","Историја","Географија"]},
+{name:"Ариф Скендер",subjects:["Математика","Англиски јазик"]},
+{name:"Мелиха Арслановска",subjects:["Музичко образование","Граѓанско образование"]},
+{name:"Ајсун Имер",subjects:["Биологија","Италијански јазик","Англиски јазик"]},
+{name:"Сибел Елмас",subjects:["Хемија","Слободен изборен предмет"]},
+{name:"Нузи Ризвановски",subjects:["Математика","Македонски јазик","Природни науки","Музичко образование","Општество","Слободни активности","Физичко и здравствено образование","Ликовно образование","Додатна настава"]},
+{name:"Асан Мемедовски",subjects:["Македонски јазик","Физичко и здравствено образование","Природни науки","Математика","Историја и општество","Ликовно образование","Слободен изборен предмет","Додатна настава"]}
+];
+const teacherNames=teachers.map(t=>t.name);
+const daysMK=["Понеделник","Вторник","Среда","Четврток","Петок"];
+const daysTR=["Pazartesi","Salı","Çarşamba","Perşembe","Cuma"];
+function dayName(d){return currentLanguage==="mk"?daysMK[d]:daysTR[d]}
+const classGroups=[
+{grade:"III",teacher:"Нузи Ризвановски",students:["Зејнеп Мустафовска","Хабил Незовски"]},
+{grade:"IV и V",teacher:"Асан Мемедовски",students:["Емел Мерсимовски","Пенил Изејровски"]},
+{grade:"VII",teacher:"Зини Скендер",students:["Самела Изејровска"]},
+{grade:"VIII",teacher:"Неџмије Мерсимовска",students:["Сенаит Алиовска","Сенида Алиовски","Едмон Сакуровски","Ресул Ризвановски"]},
+{grade:"IX",teacher:"Ариф Скендер",students:["Мелиха Мустафовска","Алиха Ваитовска"]}
+];
+const classSchedules={
+"III":[
+["Македонски јазик","Математика","Природни науки","Музичко образование","","",""],
+["Македонски јазик","Англиски јазик","Математика","Општество","Слободни активности","",""],
+["Македонски јазик","Математика","Физичко и здравствено образование","Природни науки","Ликовно образование","",""],
+["Македонски јазик","Физичко и здравствено образование","Математика","Англиски јазик","Додатна настава","",""],
+["Физичко и здравствено образование","Македонски јазик","Математика","Слободни активности","Дополнителна настава","",""]
+],
+"IV":[
+["Македонски јазик","Физичко и здравствено образование","Природни науки","Математика","Англиски јазик","",""],
+["Македонски јазик","Физичко и здравствено образование","Математика","Англиски јазик","","",""],
+["Математика","Македонски јазик","Историја и општество","Ликовно образование","Слободен изборен предмет","Додатна настава",""],
+["Македонски јазик","Природни науки","Физичко и здравствено образование","Математика","Техничко образование и информатика","Музичко образование",""],
+["Математика","Македонски јазик","Историја и општество","Англиски јазик","Слободен изборен предмет","Дополнителна настава",""]
+],
+"V":[
+["Македонски јазик","Физичко и здравствено образование","Природни науки","Математика","Англиски јазик","",""],
+["Македонски јазик","Физичко и здравствено образование","Математика","Англиски јазик","Техничко образование и информатика","",""],
+["Математика","Македонски јазик","Историја и општество","Ликовно образование","Слободен изборен предмет","Додатна настава",""],
+["Македонски јазик","Природни науки","Физичко и здравствено образование","Математика","Техничко образование и информатика","Музичко образование",""],
+["Математика","Македонски јазик","Историја и општество","Англиски јазик","Слободен изборен предмет","Дополнителна настава",""]
+],
+"VII":[
+["Одделенски час","Биологија","Физичко образование","Физика","Музичко образование","Историја","Математика"],
+["Физика","Македонски јазик","Математика","Биологија","Историја","Физичко образование","Англиски јазик"],
+["Македонски јазик","Ликовно образование","Математика","Англиски јазик","Биологија","Италијански јазик","Техничко образование"],
+["Македонски јазик","Математика","Историја","Физичко образование","Граѓанско образование","Англиски јазик",""],
+["Македонски јазик","Англиски јазик","Физичко образование","Географија","Техничко образование","Слободен изборен предмет",""]
+],
+"VIII":[
+["Одделенски час","Слободен изборен предмет","Граѓанско образование","Хемија","Физичко образование","Музичко образование","Слободен изборен предмет"],
+["Физика","Македонски јазик","Математика","Биологија","Историја","Физичко образование","Англиски јазик"],
+["Македонски јазик","Математика","Англиски јазик","Историја","Физичко образование","Географија",""],
+["Македонски јазик","Математика","Техничко образование","Ликовно образование","Италијански јазик","Географија","Биологија"],
+["Физика","Математика","Техничко образование","Италијански јазик","Македонски јазик","Англиски јазик",""]
+],
+"IX":[
+["Одделенски час","Граѓанско образование","Хемија","Историја","Слободен изборен предмет","Хемија","Музичко образование"],
+["Македонски јазик","Физика","Англиски јазик","Физичко образование","Математика","Биологија","Италијански јазик"],
+["Иновации","Физика","Македонски јазик","Физичко образование","Математика","Слободен изборен предмет","Историја"],
+["Ликовно образование","Англиски јазик","Македонски јазик","Географија","Математика","Италијански јазик",""],
+["Англиски јазик","Македонски јазик","Математика","Физичко образование","Биологија","Географија",""]
+]
+};
+const duty=[
+["Зини Скендер","Асан Мемедовски"],
+["Ајсун Имер","Нузи Ризвановски"],
+["Неџмије Мерсимовска"],
+["Ариф Скендер"],
+["Билгин Есат"]
+];
+const hours=["08:00 – 08:40","08:45 – 09:25","09:30 – 10:10","10:20 – 11:00","11:05 – 11:45","11:50 – 12:30","12:35 – 13:15"];
+const initialPrograms={
+"Билгин Есат":[
+["-","-","V – Природни науки","-","IX – СИП","-","VII – Математичка"],
+["VIII – Физика","IX – Физика","-","VII – Математичка","V – Техничко образование","-","-"],
+["-","IX – Физика","VII – Математичка","VII – Англиски","-","IX – СИП","VII – Техничко образование"],
+["VI – Математика","V – Природни науки","VIII – Техничко образование","VII – СИП","V – Техничко образование","VII – Англиски","-"],
+["VIII – Физика","VII – Англиски","VIII – Техничко образование","-","VII – Техничко образование","VII – СИП","-"]
+],
+"Сибел Елмас":[
+["-","VIII-4","IX-4","VIII-4","-","IX-4","VIII-4"],
+["-","-","-","-","-","-","-"],
+["-","-","-","-","-","-","-"],
+["-","-","-","-","-","-","-"],
+["-","-","-","-","-","-","-"]
+],
+"Мелиха Арслановска":[
+["-","IX-4","VIII-4","VII-4","VII-4","VIII-4","IX-4"],
+["-","-","-","-","-","-","-"],
+["-","-","-","-","-","-","-"],
+["-","-","-","-","-","-","-"],
+["-","-","-","-","-","-","-"]
+],
+"Зини Скендер":[
+["VII-4","V-4","VII-4","-","VIII-4","-","-"],
+["-","V-4","-","IX-4","VII-4","VIII-4","-"],
+["IX-4","VII-4","III-4","IX-4","VIII-4","-","-"],
+["IX-4","III-4","V-4","VIII-4","VII-4","-","-"],
+["IX-4","-","-","VII-4","IX-4","-","-"]
+],
+"Неџмије Мерсимовска":[
+["VIII-4","VII-4","-","IX-4","-","VII-4","-"],
+["IX-4","VIII-4","VII-4","-","VIII-4","-","-"],
+["VIII-4","-","IX-4","VIII-4","VII-4","VII-4","IX-4"],
+["VIII-4","VII-4","IX-4","IX-4","-","VIII-4","-"],
+["-","IX-4","-","VII-4","VIII-4","-","-"]
+],
+"Ариф Скендер":[
+["IX-4","-","Одделенски час","-","IV-V-4","-","-"],
+["VII-4","VII-4","VII-4","IV-V-4","IX-4","VII-4","VIII-4"],
+["VII-4","VII-4","VIII-4","-","IX-4","VII-4","-"],
+["-","VIII-4","VII-4","IX-4","-","-","-"],
+["VIII-4","VIII-4","VII-4","IV-V-4","-","VIII-4","-"]
+],
+"Ајсун Имер":[
+["-","-","-","-","-","-","-"],
+["VII-4","III-4","IX-4","VIII-4","-","IX-4","IX-4"],
+["-","-","-","-","-","-","-"],
+["-","IX-4","-","III-4","VIII-4","IX-4","VII-4"],
+["-","-","-","VII-4","IX-4","-","-"]
+]
+};
+let selectedTeacher=null,selectedClass=null;
+function showTeachers(){
+const grid=document.getElementById("teacherGrid"),body=document.getElementById("subjectBody");
+grid.replaceChildren();body.replaceChildren();
+teachers.forEach(t=>{
+grid.append(card(t.name,T("showSubjects"),()=>{selectedTeacher=t.name;renderTeacherDetail()}));
+const tr=make("tr");tr.append(make("td",translateName(t.name)),make("td",t.subjects.map(translateSubject).join(", ")));body.append(tr)
+});
+renderTeacherDetail()
+}
+function renderTeacherDetail(){
+const el=document.getElementById("teacherDetail");el.replaceChildren();
+const t=teachers.find(x=>x.name===selectedTeacher);
+if(!t){el.hidden=true;return}
+el.hidden=false;el.append(make("h3",translateName(t.name)));
+t.subjects.forEach(s=>el.append(make("span",translateSubject(s),"tag")))
+}
+function showClasses(){
+const grid=document.getElementById("classGrid");grid.replaceChildren();
+classGroups.forEach((g,i)=>{
+const grade=currentLanguage==="tr"?g.grade.replace(" и "," ve "):g.grade;
+grid.append(card(g.teacher,grade+" "+T("gradeWord")+" – "+g.students.length+" "+T("students"),()=>{selectedClass=i;renderClassDetail()}))
+});renderClassDetail()
+}
+function renderClassDetail(){
+const el=document.getElementById("classDetail");el.replaceChildren();
+if(selectedClass===null){el.hidden=true;return}
+const g=classGroups[selectedClass];el.hidden=false;
+el.append(make("h3",translateName(g.teacher)+" – "+g.grade.replace(" и ",currentLanguage==="tr"?" ve ":" и ")));
+const list=make("ol");g.students.forEach(s=>list.append(make("li",translateStudentName(s))));el.append(list)
+}
+function showClassSchedule(){
+const grade=document.getElementById("grade").value,data=classSchedules[grade],table=document.getElementById("classScheduleTable");
+table.replaceChildren();document.getElementById("scheduleTitle").textContent=grade+" – "+T("weekly");
+const head=make("thead"),tr=make("tr");
+[T("lessonNumber"),...Array.from({length:5},(_,d)=>dayName(d))].forEach(x=>tr.append(make("th",x)));head.append(tr);
+const body=make("tbody");
+for(let h=0;h<7;h++){const row=make("tr");row.append(make("th",String(h+1)));for(let d=0;d<5;d++)row.append(make("td",translateLesson(data[d][h])));body.append(row)}
+table.append(head,body)
+}
+const STORAGE_KEY="mka_replacements_primary_2026_v2";
+let program={};
+function addPrimaryTeacherSchedules(){
+const nuzi="Нузи Ризвановски",asan="Асан Мемедовски",bilgin="Билгин Есат",english="Англиски јазик",science="Природни науки",technical="Техничко образование и информатика";
+for(let d=0;d<5;d++)for(let h=0;h<7;h++){
+const third=classSchedules.III[d][h];
+program[nuzi][d][h]=third&&third!==english?{status:"busy",lesson:"III – "+third}:{status:"free",lesson:""};
+const fourth=classSchedules.IV[d][h],fifth=classSchedules.V[d][h],asanClasses=[];
+if(fourth&&fourth!==english)asanClasses.push("IV");
+if(fifth&&fifth!==english&&fifth!==science&&fifth!==technical)asanClasses.push("V");
+program[asan][d][h]=asanClasses.length?{status:"busy",lesson:asanClasses.join("/")+" – "+(fourth&&fourth!==english?fourth:fifth)}:{status:"free",lesson:""};
+if(fifth&&(fifth===science||fifth===technical))program[bilgin][d][h]={status:"busy",lesson:"V – "+fifth}
+}
+}
+function createProgram(){
+program={};
+teacherNames.forEach(name=>{
+program[name]=[];
+for(let d=0;d<5;d++){
+program[name][d]=[];
+for(let h=0;h<7;h++){
+const value=initialPrograms[name]?.[d]?.[h];
+program[name][d][h]=value==="-"?{status:"free",lesson:""}:value&&value!=="?"?{status:"busy",lesson:value}:{status:"unknown",lesson:""}
+}
+}
+});
+addPrimaryTeacherSchedules()
+}
+function loadProgram(){
+createProgram();
+try{
+const saved=JSON.parse(localStorage.getItem(STORAGE_KEY)||"{}");
+teacherNames.forEach(name=>{for(let d=0;d<5;d++)for(let h=0;h<7;h++){
+const slot=saved?.[name]?.[d]?.[h];
+if(slot&&["free","busy","unknown"].includes(slot.status))program[name][d][h]={status:slot.status,lesson:String(slot.lesson||"")}
+}})
+}catch(e){console.error(e)}
+}
+function freeTeachers(day,hour,absent){
+return teacherNames.filter(name=>name!==absent&&program[name][day][hour].status==="free")
+}
+function showReplacement(){
+const absent=document.getElementById("absentTeacher").value,day=Number(document.getElementById("selectedDay").value),body=document.getElementById("resultBody");
+body.replaceChildren();
+document.getElementById("resultTitle").textContent=translateName(absent)+" – "+dayName(day);
+let busy=0,free=0,unknown=0;
+for(let h=0;h<7;h++){
+const slot=program[absent][day][h],row=make("tr"),hourCell=make("td",(h+1)+". "+T("lesson")),lessonCell=make("td"),statusCell=make("td"),replacementCell=make("td");
+if(slot.status==="busy"){
+busy++;
+lessonCell.textContent=slot.lesson?translateSubject(slot.lesson):T("notEntered");
+statusCell.textContent=T("hasLesson");statusCell.className="busy";
+const candidates=freeTeachers(day,h,absent);
+replacementCell.textContent=candidates.length?candidates.map(x=>translateName(x)+" – "+T("canReplace")).join("; "):T("noCandidates");
+replacementCell.className=candidates.length?"free":"unknown"
+}else if(slot.status==="free"){
+free++;lessonCell.textContent="—";statusCell.textContent=T("noLesson");statusCell.className="free";replacementCell.textContent=T("notNeeded")
+}else{
+unknown++;lessonCell.textContent="—";statusCell.textContent=T("unverified");statusCell.className="unknown";replacementCell.textContent=T("needsCheck")
+}
+row.append(hourCell,lessonCell,statusCell,replacementCell);body.append(row)
+}
+document.getElementById("summary").textContent=T("total")+": "+busy+" "+T("busyCount")+" | "+free+" "+T("freeCount")+" | "+unknown+" "+T("unknownCount")
+}
+function showEditor(){
+const teacher=document.getElementById("editTeacher").value,day=Number(document.getElementById("editDay").value),body=document.getElementById("editBody");
+body.replaceChildren();
+for(let h=0;h<7;h++){
+const slot=program[teacher][day][h],tr=make("tr"),hour=make("td",(h+1)+". "+T("lesson")),statusCell=make("td"),lessonCell=make("td"),select=make("select");
+select.className="editStatus";
+[["unknown",T("unknown")],["busy",T("busy")],["free",T("free")]].forEach(([v,t])=>addOption(select,v,t));
+select.value=slot.status;
+const input=make("input");
+input.className="editLesson";input.placeholder=T("placeholder");input.value=translateSubject(slot.lesson);input.disabled=select.value!=="busy";
+select.onchange=()=>{input.disabled=select.value!=="busy"};
+statusCell.append(select);lessonCell.append(input);tr.append(hour,statusCell,lessonCell);body.append(tr)
+}
+}
+function saveProgram(){
+const teacher=document.getElementById("editTeacher").value,day=Number(document.getElementById("editDay").value),statuses=document.querySelectorAll(".editStatus"),lessons=document.querySelectorAll(".editLesson");
+for(let h=0;h<7;h++)program[teacher][day][h]={status:statuses[h].value,lesson:statuses[h].value==="busy"?toMacedonianLesson(lessons[h].value.trim()):""};
+try{
+localStorage.setItem(STORAGE_KEY,JSON.stringify(program));
+document.getElementById("saveMessage").textContent=T("saved");document.getElementById("saveMessage").className="free"
+}catch(e){
+document.getElementById("saveMessage").textContent=T("saveError");document.getElementById("saveMessage").className="busy"
+}
+showReplacement()
+}
+function resetProgram(){
+if(!confirm(T("resetConfirm")))return;
+try{localStorage.removeItem(STORAGE_KEY)}catch(e){}
+createProgram();showEditor();showReplacement();
+document.getElementById("saveMessage").textContent=T("resetDone");
+document.getElementById("saveMessage").className="free"
+}
+function showDuty(){
+const grid=document.getElementById("dutyGrid");grid.replaceChildren();
+duty.forEach((names,d)=>{const c=make("div",undefined,"card");c.append(make("h3",dayName(d)));names.forEach(name=>c.append(make("p",translateName(name))));grid.append(c)})
+}
+function showHours(){
+const grid=document.getElementById("hoursGrid");grid.replaceChildren();
+hours.forEach((time,h)=>{const c=make("div",undefined,"card");c.append(make("strong",(h+1)+". "+T("lesson").toUpperCase()),make("h3",time));grid.append(c)})
+}
+function setLanguage(lang){
+if(!["mk","tr"].includes(lang))return;
+currentLanguage=lang;
+try{localStorage.setItem("mka_language",lang)}catch(e){}
+renderLanguage()
+}
+function renderLanguage(){
+document.documentElement.lang=currentLanguage;
+document.getElementById("mkBtn").classList.toggle("active",currentLanguage==="mk");
+document.getElementById("trBtn").classList.toggle("active",currentLanguage==="tr");
+document.querySelectorAll("[data-t]").forEach(el=>{el.textContent=T(el.dataset.t)});
+document.title=T("school");
+document.getElementById("topInfo").textContent=T("year")+" | "+T("prepared");
+document.getElementById("schoolName").textContent=T("school");
+document.getElementById("schoolLocation").textContent=T("location");
+document.getElementById("aboutSchool").textContent=T("school")+" – "+T("location");
+document.getElementById("directorName").textContent=translateName("Бенази Шхемовска");
+document.getElementById("directorAvatar").textContent=currentLanguage==="tr"?"BŞ":"БШ";
+document.getElementById("footerSchool").textContent=T("school");
+document.getElementById("footerDirector").textContent=T("directorFooter");
+document.getElementById("footerLocation").textContent=T("location");
+document.getElementById("footerYear").textContent=T("year");
+document.getElementById("footerPrepared").textContent=T("prepared");
+document.getElementById("footerOpen").textContent=T("open");
+["selectedDay","editDay"].forEach(id=>{
+const select=document.getElementById(id),oldValue=select.value;select.replaceChildren();
+for(let d=0;d<5;d++)addOption(select,String(d),dayName(d));
+select.value=oldValue
+});
+["absentTeacher","editTeacher"].forEach(id=>{
+const select=document.getElementById(id);
+Array.from(select.options).forEach(option=>{option.textContent=translateName(option.value)})
+});
+document.getElementById("saveMessage").textContent="";
+showTeachers();showClasses();showClassSchedule();showReplacement();showEditor();showDuty();showHours()
+}
+function init(){
+loadProgram();
+const grade=document.getElementById("grade");
+Object.keys(classSchedules).forEach(g=>addOption(grade,g,g));
+grade.onchange=showClassSchedule;
+const absent=document.getElementById("absentTeacher"),editTeacher=document.getElementById("editTeacher");
+teacherNames.forEach(name=>{addOption(absent,name,name);addOption(editTeacher,name,name)});
+absent.value="Билгин Есат";editTeacher.value="Билгин Есат";
+["selectedDay","editDay"].forEach(id=>{
+const select=document.getElementById(id);
+for(let d=0;d<5;d++)addOption(select,String(d),daysMK[d])
+});
+absent.onchange=showReplacement;
+document.getElementById("selectedDay").onchange=showReplacement;
+document.getElementById("checkBtn").onclick=showReplacement;
+editTeacher.onchange=showEditor;
+document.getElementById("editDay").onchange=showEditor;
+document.getElementById("saveBtn").onclick=saveProgram;
+document.getElementById("resetBtn").onclick=resetProgram;
+renderLanguage()
+}
+init();
+</script>
+</body>
+</html>
